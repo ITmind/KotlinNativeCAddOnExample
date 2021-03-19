@@ -12,35 +12,46 @@ application {
     privateHeaders {
         from("../bin")
     }
-    buildDir = file("../bin")
+    //buildDir = file("../bin")
     targetMachines.add(machines.windows.x86_64)
-    println("configure app")
-
 }
 
+tasks.register("MyTest"){
+    dependsOn("build")
+    //mustRunAfter(":mainC:build")
+    doLast {
+        println("myTest")
+    }
+
+    println("config myTest")
+}
+
+/*println("array of task:")
+tasks.forEach {
+    println("task ${it.name} is ${it.enabled}")
+}*/
+
 tasks.withType(CppCompile::class){
-    println("configure compile $name")
+    //println("configure compile $name")
 }
 
 tasks.withType(LinkExecutable::class){
-    println("configure link  $name")
+    //println("configure link  $name")
 }
 
 tasks.withType(InstallExecutable::class){
     doLast{
-        println("last install  $name")
+        //println("last install  $name")
     }
-    println("configure install  $name")
+    //println("configure install  $name")
 }
 
 tasks.withType(GradleBuild::class){
-    println("configure link  $name")
+    //println("configure link  $name")
 }
 
-val buildTask = tasks.findByName("build")
-buildTask?.doLast {
-    println("build  $name")
-}
-tasks.withType(GradleBuild::class){
-    println("configure build  $name")
+tasks.getByName("build"){
+    doLast {
+        println("build2  $name")
+    }
 }

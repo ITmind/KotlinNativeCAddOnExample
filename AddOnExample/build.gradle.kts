@@ -30,15 +30,14 @@ kotlin {
         val nativeMain by getting
         val nativeTest by getting
     }
+}
 
-    val copy2 by tasks.registering(Copy::class) {
-        dependsOn("build")
-        doLast {
-            println("hello")
+tasks.getByName("build"){
+    doLast {
+        println("build2  $name")
+        Copy().apply{
+            from("$buildDir/bin/native/debugShared")
+            into("$buildDir/../../bin")
         }
-        from("$buildDir/bin/native/debugShared")
-        into("$buildDir/../../bin")
     }
-
-    //println("hello")
 }
