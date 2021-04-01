@@ -1,0 +1,4 @@
+LIBRARY    "addinC.dll"
+
+EXPORTS
+GetClassObject
